@@ -1,6 +1,10 @@
-import { SaleAggregate } from "./domain/sale/sale";
+import { plainToInstance } from "class-transformer";
+import { NewSaleCommand } from "./src/commands/new-sale.command";
+import { SaleAggregate } from "./src/domain/sales/sale";
 
-const sale = new SaleAggregate("Example product");
+const command = plainToInstance(NewSaleCommand, {
+  productCode: 'code 1'
+});
 
-sale.chargeClient(100);
-sale.markChangesAsCommited();
+const sale = new SaleAggregate(command);
+console.log(sale);

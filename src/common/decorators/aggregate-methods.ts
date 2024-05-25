@@ -1,5 +1,6 @@
 import "reflect-metadata";
-import { BaseEvent } from "./base-event";
+import { BaseEvent } from "../event/base.event";
+import { InvalidMethodException } from "./invalid-method.exception";
 
 const applyMetadataKey = Symbol("apply-aggregate-event");
 
@@ -30,5 +31,5 @@ export function getHandlerMethod(target: any, eventName: string) {
   if (appliers.has(eventName)) {
     return appliers.get(eventName);
   }
-  throw new Error("Could not find an event applier");
+  throw new InvalidMethodException(eventName);
 }

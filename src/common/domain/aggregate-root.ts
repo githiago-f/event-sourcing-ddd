@@ -1,12 +1,13 @@
-import { randomUUID } from "crypto";
-import { getHandlerMethod } from "./aggregate-methods";
-import { BaseEvent } from "./base-event";
+import { UUID, randomUUID } from "crypto";
+import { getHandlerMethod } from "../decorators/aggregate-methods";
+import { BaseEvent } from "../event/base.event";
+import { InvalidMethodException } from "../decorators/invalid-method.exception";
 
 export abstract class AggregateRoot {
-  protected id!: string;
+  protected id!: UUID;
   private _version = -1;
   private _changes!: Array<BaseEvent>;
-  private logger = console;
+  protected _logger = console;
 
   constructor(id = randomUUID()) {
     this.id = id;
@@ -19,7 +20,9 @@ export abstract class AggregateRoot {
   }
 
   /**
-   * Do not change this with pop or push commands
+   * Changing this array will not affect the
+   * `changes` property. To do that, you should
+   * raise an event.
    */
   public get uncommitedChanges() {
     return new Array(...this._changes);
@@ -27,7 +30,7 @@ export abstract class AggregateRoot {
 
   public markChangesAsCommited() {
     this._changes = [];
-    this.logger.log("All changes got commited.");
+    this._logger.log("All changes got commited.");
   }
 
   /**
@@ -38,11 +41,15 @@ export abstract class AggregateRoot {
    */
   protected applyChange(event: BaseEvent, isNewEvent = false) {
     try {
-      getHandlerMethod(this, event.eventName)?.call(this, event);
+      getHandlerMethod(this, event.name)?.call(this, event);
     } catch (e) {
-      this.logger.log(
-        "Error applying event to aggregate " + (e as Error).message,
-      );
+      if (e instanceof InvalidMethodException) {
+        this._logger.error(e.message);
+      } else {
+        this._logger.error(
+          "Error applying event to aggregate " + (e as Error).message,
+        );
+      }
     } finally {
       if (isNewEvent) {
         this._changes.push(event);
