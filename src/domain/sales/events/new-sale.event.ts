@@ -2,7 +2,9 @@ import { UUID } from "crypto";
 import { BaseEvent } from "../../../common/event/base.event";
 import { NewSaleCommand } from "../../../commands/new-sale.command";
 import { plainToInstance } from "class-transformer";
+import { EventImpl } from "../../../common/decorators/event";
 
+@EventImpl()
 export class NewSaleEvent extends BaseEvent {
   readonly name = 'NewSaleEvent';
 
@@ -12,7 +14,9 @@ export class NewSaleEvent extends BaseEvent {
 
   static fromCommand(command: NewSaleCommand) {
     return plainToInstance(NewSaleEvent, {
-      productCode: command.productCode
+      productCode: command.productCode,
+      recipientId: command.recipientId,
+      financialResponsibleId: command.financialResponsibleId
     } as NewSaleEvent);
   }
 }

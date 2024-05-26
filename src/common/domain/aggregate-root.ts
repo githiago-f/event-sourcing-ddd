@@ -2,9 +2,10 @@ import { UUID, randomUUID } from "crypto";
 import { getHandlerMethod } from "../decorators/aggregate-methods";
 import { BaseEvent } from "../event/base.event";
 import { InvalidMethodException } from "../decorators/invalid-method.exception";
+import { instanceToPlain } from "class-transformer";
 
 export abstract class AggregateRoot {
-  protected id!: UUID;
+  public readonly id!: UUID;
   private _version = -1;
   private _changes!: Array<BaseEvent>;
   protected _logger = console;
@@ -61,7 +62,11 @@ export abstract class AggregateRoot {
     return this.applyChange(event, true);
   }
 
-  protected replay() {
-    return this._changes.forEach((change) => this.applyChange(change));
+  public replay(events: Array<BaseEvent>) {
+    return events.forEach((change) => this.applyChange(change));
+  }
+
+  toJSON() {
+    return instanceToPlain(this, { excludePrefixes: ['_'] });
   }
 }
