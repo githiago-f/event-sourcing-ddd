@@ -43,6 +43,9 @@ export abstract class AggregateRoot {
    */
   protected applyChange(event: BaseEvent, isNewEvent = false) {
     try {
+      if(this.version < event.version) {
+        this._version = event.version;
+      }
       getHandlerMethod(this, event.name)?.call(this, event);
     } catch (e) {
       if (e instanceof InvalidMethodException) {
