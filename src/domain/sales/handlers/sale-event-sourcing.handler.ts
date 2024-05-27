@@ -1,7 +1,7 @@
 import { UUID } from "crypto";
-import { EventSourcingHandler } from "../../../common/domain/event-sourcing.handler";
-import { SaleAggregate } from "../sale";
-import { EventStore } from "../../../common/domain/event-store.service";
+import { EventSourcingHandler } from "../../../common/domain/event-sourcing.handler.js";
+import { SaleAggregate } from "../sale.js";
+import { EventStore } from "../../../common/domain/event-store.service.js";
 
 export class SaleEventSourcingHandler implements EventSourcingHandler<SaleAggregate> {
   private readonly _eventStore: EventStore;

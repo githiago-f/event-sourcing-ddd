@@ -1,8 +1,8 @@
 import { UUID } from "crypto";
-import { BaseEvent } from "../../../common/event/base.event";
-import { NewSaleCommand } from "../../../commands/new-sale.command";
+import { BaseEvent } from "../../../common/event/base.event.js";
+import { NewSaleCommand } from "../../../commands/new-sale.command.js";
 import { plainToInstance } from "class-transformer";
-import { EventImpl } from "../../../common/decorators/event";
+import { EventImpl } from "../../../common/decorators/event.js";
 
 @EventImpl()
 export class NewSaleEvent extends BaseEvent {

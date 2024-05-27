@@ -1,5 +1,5 @@
 import { UUID } from "crypto";
-import { EventModel } from "../event/event.model";
+import { EventModel } from "../event/event.model.js";
 
 /**
  * Should be implemented for a NOSQL

@@ -1,7 +1,7 @@
-import { BaseCommand } from "./base.command";
-import { CommandHandler } from "./command.handler";
+import { BaseCommand } from "./base.command.js";
+import { CommandHandler } from "./command.handler.js";
 
-export class EventDispatcher {
+export class CommandDispatcher {
   private _routes = new Map<string, Set<CommandHandler>>();
 
   registerHandler(type: string, handler: CommandHandler): void {

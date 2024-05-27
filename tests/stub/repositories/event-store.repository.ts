@@ -1,6 +1,6 @@
 import { UUID } from "crypto";
-import { EventRepository } from "../../../src/common/domain/event.repository";
-import { EventModel } from "../../../src/common/event/event.model";
+import { EventRepository } from "../../../src/common/domain/event.repository.js";
+import { EventModel } from "../../../src/common/event/event.model.js";
 
 export class EventStoreInMemoryRespository implements EventRepository {
   private _events: EventModel[] = [];

@@ -1,7 +1,7 @@
 import { UUID } from "crypto";
-import { BaseEvent } from "../event/base.event";
-import { EventRepository } from "./event.repository";
-import { EventModel } from "../event/event.model";
+import { BaseEvent } from "../event/base.event.js";
+import { EventRepository } from "./event.repository.js";
+import { EventModel } from "../event/event.model.js";
 
 export class EventStore {
   private readonly _eventRepository: EventRepository;

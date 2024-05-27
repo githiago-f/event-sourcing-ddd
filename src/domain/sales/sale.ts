@@ -1,12 +1,11 @@
-import { AggregateRoot } from "../../common/domain/aggregate-root";
-import { Charge } from "./charge";
-import { Client } from "./client";
-import { Product } from "./product";
-import { SaleStatus } from "./vo/sale-status";
-import { EventApplier } from "../../common/decorators/aggregate-methods";
-import { NewSaleEvent } from "./events/new-sale.event";
-import { NewSaleCommand } from "../../commands/new-sale.command";
-import { SaleInsertedEvent } from "./events/sale-inserted.event";
+import { AggregateRoot } from "../../common/domain/aggregate-root.js";
+import { Charge } from "./charge.js";
+import { Client } from "./client.js";
+import { Product } from "./product.js";
+import { SaleStatus } from "./vo/sale-status.js";
+import { EventApplier } from "../../common/decorators/aggregate-methods.js";
+import { NewSaleEvent } from "./events/new-sale.event.js";
+import { NewSaleCommand } from "../../commands/new-sale.command.js";
 import { Expose, plainToInstance } from "class-transformer";
 import { UUID } from "crypto";
 
@@ -52,18 +51,5 @@ export class SaleAggregate extends AggregateRoot {
         id: event.financialResponsibleId
       } as Client);
     }
-  }
-
-  @EventApplier("SaleInsertedEvent")
-  private applySaleInsertion(event: SaleInsertedEvent) {
-    this._logger.log('New sale creation::', event);
-  }
-
-  @EventApplier("ChargeInsertionEvent")
-  private applyChargeInserted(event: void) {
-  }
-
-  @EventApplier("InitiateAnalysisEvent")
-  private applyAnalysis(event: void) {
   }
 }

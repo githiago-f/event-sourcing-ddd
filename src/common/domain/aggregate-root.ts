@@ -1,7 +1,7 @@
 import { UUID, randomUUID } from "crypto";
-import { getHandlerMethod } from "../decorators/aggregate-methods";
-import { BaseEvent } from "../event/base.event";
-import { InvalidMethodException } from "../decorators/invalid-method.exception";
+import { getHandlerMethod } from "../decorators/aggregate-methods.js";
+import { BaseEvent } from "../event/base.event.js";
+import { InvalidMethodException } from "../decorators/invalid-method.exception.js";
 import { Expose, instanceToPlain } from "class-transformer";
 
 export abstract class AggregateRoot {
