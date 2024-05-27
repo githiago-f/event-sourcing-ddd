@@ -23,4 +23,4 @@ const eventSourcingHandler = new SaleEventSourcingHandler(eventStore);
 await eventSourcingHandler.save(sale);
 
 const aggregate = await eventSourcingHandler.findById(sale.id);
-console.log(JSON.stringify(aggregate) === JSON.stringify(sale));
+console.log(JSON.stringify(aggregate));

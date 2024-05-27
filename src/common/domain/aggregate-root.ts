@@ -2,7 +2,7 @@ import { UUID, randomUUID } from "crypto";
 import { getHandlerMethod } from "../decorators/aggregate-methods";
 import { BaseEvent } from "../event/base.event";
 import { InvalidMethodException } from "../decorators/invalid-method.exception";
-import { instanceToPlain } from "class-transformer";
+import { Expose, instanceToPlain } from "class-transformer";
 
 export abstract class AggregateRoot {
   public readonly id!: UUID;
@@ -16,6 +16,7 @@ export abstract class AggregateRoot {
     this._changes = [];
   }
 
+  @Expose()
   public get version() {
     return this._version;
   }

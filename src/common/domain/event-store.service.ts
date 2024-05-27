@@ -19,7 +19,7 @@ export class EventStore {
     }
     let version = expectedVersion;
     for (const event of events) {
-      event.version = ++version;
+      event.version = version++;
       const aggregateData = { aggregateId, aggregateType: this._aggregateType };
       const eventModel = EventModel.fromEvent(aggregateData, event);
       await this._eventRepository.save(eventModel);
