@@ -6,6 +6,12 @@ import { randomUUID } from "crypto";
 import { SaleEventSourcingHandler } from "./src/domain/sales/handlers/sale-event-sourcing.handler";
 import { EventStoreInMemoryRespository } from "./tests/stub/repositories/event-store.repository";
 
+/**
+ * This code is a test based on event-sourcing
+ * with CQRS, the most part is for writing changes
+ * to the aggregate.
+ */
+
 const command = plainToInstance(NewSaleCommand, {
   productCode: 'code 1',
   recipientId: randomUUID(),
@@ -21,6 +27,3 @@ const eventStore = new EventStore(repository, 'SaleAggregate');
 const eventSourcingHandler = new SaleEventSourcingHandler(eventStore);
 
 await eventSourcingHandler.save(sale);
-
-const aggregate = await eventSourcingHandler.findById(sale.id);
-console.log(JSON.stringify(aggregate));

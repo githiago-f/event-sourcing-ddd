@@ -6,5 +6,5 @@ export abstract class BaseEvent {
   public readonly abstract name: string;
   public version!: number;
 
-  static events = new Set<ClassConstructor<any>>();
+  static events = new Map<string, ClassConstructor<any>>();
 }

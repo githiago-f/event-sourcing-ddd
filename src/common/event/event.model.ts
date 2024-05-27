@@ -18,7 +18,7 @@ export class EventModel {
   public readonly eventData!: string;
 
   public static fromEvent<T extends BaseEvent>(aggregate: AggregateData, event: T): EventModel {
-    const eventData = instanceToPlain(event, {excludePrefixes: ['_']});
+    const eventData = instanceToPlain(event);
     return plainToInstance(EventModel, {
       aggregateId: aggregate.aggregateId,
       createdAt: new Date(),
@@ -30,12 +30,10 @@ export class EventModel {
   }
 
   public toBaseEvent<T extends BaseEvent>(): T {
-    const eventType = new Array(...BaseEvent.events.values())
-      .filter(be => be.name === this.eventType)
-      .pop();
-    if(eventType === undefined) {
+    if(!BaseEvent.events.has(this.eventType)) {
       throw new Error('Undefiend event');
     }
+    const eventType = BaseEvent.events.get(this.eventType)!;
     const fromString = JSON.parse(this.eventData);
     return plainToInstance(eventType, fromString);
   }
