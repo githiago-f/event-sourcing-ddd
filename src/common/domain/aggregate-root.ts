@@ -63,8 +63,8 @@ export abstract class AggregateRoot {
     return this.applyChange(event, true);
   }
 
-  public replay(events: Array<BaseEvent>) {
-    return events.forEach((change) => this.applyChange(change));
+  public replay(events?: Array<BaseEvent>) {
+    return (events??this._changes).forEach((change) => this.applyChange(change));
   }
 
   toJSON() {
