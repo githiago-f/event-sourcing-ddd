@@ -27,3 +27,5 @@ const command = plainToInstance(NewSaleCommand, {
 });
 
 saleCommandHandler.handleNewSale(command);
+
+

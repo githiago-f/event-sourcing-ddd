@@ -1,17 +1,13 @@
 /**
  * status processment flow should allwais be:
- * Processing -> Analysis  - approve -> Approved -> Billing - reject -> Rejected
- *                         - reject -> Rejected             - cancel -> Canceled
- *                         - cancel -> Canceled
+ * Processing - on first charge inserted -> Billing - reject -> Rejected
+ *           * - cancel -> Canceled
  */
 export enum SaleStatus {
   PROCESSING = 'PROCESSING',
-
-  ANALYSIS = 'ANALYSIS',
-  REJECTED = 'REJECTED',
-  APPROVED = 'APPROVED',
-
   BILLING  = 'BILLING',
+
+  REJECTED = 'REJECTED',
   CANCELED = 'CANCELED'
 }
 
