@@ -1,9 +1,9 @@
-import { AggregateRoot } from "../../common/domain/aggregate-root.js";
+import { AggregateRoot } from "../../../cqrs/domain/aggregate-root.js";
 import { Charge } from "./charge.js";
 import { Client } from "../client/client.js";
 import { Product } from "./product.js";
 import { SaleStatus } from "./vo/sale-status.js";
-import { EventApplier } from "../../common/decorators/aggregate-methods.js";
+import { EventApplier } from "../../../cqrs/decorators/aggregate-methods.js";
 import { NewSaleEvent } from "./events/new-sale.event.js";
 import { NewSaleCommand } from "../../commands/new-sale.command.js";
 import { Expose, plainToInstance } from "class-transformer";

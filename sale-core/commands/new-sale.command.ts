@@ -1,5 +1,5 @@
 import { UUID } from "crypto";
-import { BaseCommand } from "../common/command/base.command.js";
+import { BaseCommand } from "cqrs/command/base.command.js";
 
 export class NewSaleCommand extends BaseCommand {
   readonly name = 'NewSaleCommand';

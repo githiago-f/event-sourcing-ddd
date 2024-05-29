@@ -1,5 +1,5 @@
 import { NewSaleCommand } from "../../../commands/new-sale.command.js";
-import { EventSourcingHandler } from "../../../common/domain/event-sourcing.handler.js";
+import { EventSourcingHandler } from "../../../../cqrs/domain/event-sourcing.handler.js";
 import { SaleAggregate } from "../sale.js";
 
 export class SaleCommandHandler {

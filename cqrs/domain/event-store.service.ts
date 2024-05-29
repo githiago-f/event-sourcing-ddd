@@ -4,8 +4,8 @@ import { EventRepository } from "./event.repository.js";
 import { EventModel } from "../event/event.model.js";
 
 export class EventStore {
-  private readonly _eventRepository: EventRepository;
   private readonly _aggregateType: string;
+  private readonly _eventRepository: EventRepository;
 
   constructor(eventRepository: EventRepository, aggregateType: string) {
     this._eventRepository = eventRepository;
@@ -29,6 +29,6 @@ export class EventStore {
 
   async getEvents<T extends BaseEvent>(aggregateId: UUID): Promise<T[]> {
     const events = await this._eventRepository.findByAggregateId(aggregateId);
-    return events.map(e => e.toBaseEvent<T>());
+    return events.map(e => e.toEventType<T>());
   }
 }

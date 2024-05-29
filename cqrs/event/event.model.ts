@@ -29,7 +29,7 @@ export class EventModel {
     });
   }
 
-  public toBaseEvent<T extends BaseEvent>(): T {
+  public toEventType<T extends BaseEvent>(): T {
     if(!BaseEvent.events.has(this.eventType)) {
       throw new Error('Undefiend event');
     }

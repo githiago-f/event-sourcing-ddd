@@ -1,0 +1,5 @@
+service: my-experiment
+
+functions:
+  NewSale:
+    handler: ./src/functions/NewSale/handler.ts
