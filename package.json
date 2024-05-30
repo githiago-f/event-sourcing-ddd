@@ -1,4 +1,5 @@
 {
+  "private": true,
   "name": "nodejs-typescript",
   "version": "1.0.0",
   "description": "",
@@ -8,10 +9,15 @@
     "node": "^20.12.2"
   },
   "scripts": {
-    "sls-services": "pnpm --filter sls-services",
-    "cqrs": "pnpm --filter cqrs",
-    "sale-core": "pnpm --filter sale-core"
+    "sls": "yarn workspace sls-services sls",
+    "build": "yarn workspace cqrs build && yarn workspace sale-core build",
+    "deploy": "yarn workspace sls-services sls deploy --stage develop"
   },
-  "author": "",
+  "workspaces": [
+    "sls-services",
+    "cqrs",
+    "sale-core"
+  ],
+  "author": "github@githiago-f",
   "license": "ISC"
 }

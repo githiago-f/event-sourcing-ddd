@@ -1,4 +1,4 @@
-import { UUID } from "crypto";
+import { UUID, randomUUID } from "crypto";
 import { BaseEvent } from "./base.event.js";
 import { instanceToPlain, plainToInstance } from "class-transformer";
 
@@ -20,6 +20,7 @@ export class EventModel {
   public static fromEvent<T extends BaseEvent>(aggregate: AggregateData, event: T): EventModel {
     const eventData = instanceToPlain(event);
     return plainToInstance(EventModel, {
+      id: randomUUID(),
       aggregateId: aggregate.aggregateId,
       createdAt: new Date(),
       aggregateType: aggregate.aggregateType,

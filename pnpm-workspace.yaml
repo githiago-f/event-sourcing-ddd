@@ -1,7 +1,0 @@
-packages:
-  - cqrs
-  - sale-core
-  # this is the service that will be
-  # built from here
-  - sls-services
-  - '!**/test/**'

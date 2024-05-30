@@ -1,5 +1,54 @@
 service: my-experiment
+frameworkVersion: '3'
+
+provider:
+  name: aws
+  stage: ${opt:stage, 'develop'}
+  region: us-east-1
+  runtime: nodejs20.x
+  iam:
+    role:
+      statements:
+        - Effect: 'Allow'
+          Action:
+            - 'dynamodb:Query'
+            - 'dynamodb:PutItem'
+            - 'dynamodb:Get*'
+            - 'dynamodb:Scan*'
+            - 'dynamodb:UpdateItem'
+            - 'dynamodb:DeleteItem'
+          Resource: arn:aws:dynamodb:${aws:region}:${aws:accountId}:table/${self:provider.environment.EVENT_STORE}
+  environment:
+    EVENT_STORE: sales_event_store
+
+plugins:
+  - serverless-plugin-monorepo
+
+resources:
+  Resources:
+    EventStoreTable:
+      Type: AWS::DynamoDB::Table
+      Properties:
+        TableName: ${self:provider.environment.EVENT_STORE}
+        AttributeDefinitions:
+          - AttributeName: id
+            AttributeType: S
+          - AttributeName: version
+            AttributeType: 'N'
+        KeySchema:
+          - AttributeName: id
+            KeyType: HASH
+          - AttributeName: version
+            KeyType: RANGE
+        ProvisionedThroughput:
+          ReadCapacityUnits: 1
+          WriteCapacityUnits: 1
+        BillingMode: PROVISIONED
 
 functions:
   NewSale:
-    handler: ./src/functions/NewSale/handler.ts
+    handler: .build/functions/NewSale/handler.handler
+    events:
+      - httpApi:
+          path: /sales
+          method: GET

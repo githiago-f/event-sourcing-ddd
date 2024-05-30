@@ -1,14 +1,13 @@
-import { AggregateRoot } from "../../../cqrs/domain/aggregate-root.js";
 import { Charge } from "./charge.js";
 import { Client } from "../client/client.js";
 import { Product } from "./product.js";
 import { SaleStatus } from "./vo/sale-status.js";
-import { EventApplier } from "../../../cqrs/decorators/aggregate-methods.js";
+import { EventApplier, AggregateRoot } from "cqrs";
 import { NewSaleEvent } from "./events/new-sale.event.js";
-import { NewSaleCommand } from "../../commands/new-sale.command.js";
 import { Expose, plainToInstance } from "class-transformer";
 import { UUID, randomUUID } from "crypto";
 import { ChargeInsertionEvent } from "./events/charge-insertion.event.js";
+import { NewSaleCommand } from "../../commands/new-sale.command.js";
 
 export class SaleAggregate extends AggregateRoot {
   private _product!: Product;

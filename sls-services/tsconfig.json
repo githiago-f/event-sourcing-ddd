@@ -1,9 +1,8 @@
 {
   "extends": "../tsconfig.json",
   "compilerOptions": {
-    "typeRoots": [
-			"./node_modules/@types",
-		],
+    "esModuleInterop": true,
+    "allowJs": true,
     "outDir": "./.build",
   }
 }

@@ -1,7 +1,6 @@
 import { UUID } from "crypto";
-import { EventSourcingHandler } from "../../../../cqrs/domain/event-sourcing.handler.js";
 import { SaleAggregate } from "../sale.js";
-import { EventStore } from "../../../../cqrs/domain/event-store.service.js";
+import { EventStore, EventSourcingHandler } from "cqrs";
 
 export class SaleEventSourcingHandler implements EventSourcingHandler<SaleAggregate> {
   private readonly _eventStore: EventStore;
@@ -17,8 +16,9 @@ export class SaleEventSourcingHandler implements EventSourcingHandler<SaleAggreg
     return aggregate;
   }
 
-  async save(aggregate: SaleAggregate): Promise<void> {
+  async save(aggregate: SaleAggregate): Promise<SaleAggregate> {
     await this._eventStore.saveEvents(aggregate.id, aggregate.uncommitedChanges, aggregate.version);
     aggregate.markChangesAsCommited();
+    return aggregate;
   }
 }
