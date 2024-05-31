@@ -1,19 +1,22 @@
 import { ChargeStatus } from "./vo/charge-status.js";
+import { ReferenceMonth } from "./vo/reference-month.js";
 
 /**
  * maybe should be an aggregate too and keep
  * a history of every change on this object.
  */
 export class Charge {
-    public readonly id: any;
-    private _status!: ChargeStatus;
+  public readonly id: string;
+  public readonly referenceMonth!: ReferenceMonth;
+  private _status!: ChargeStatus;
 
-    constructor(identity: any) {
-        this.id = identity;
-        this._status = ChargeStatus.ANALYSIS;
-    }
+  constructor(identity: string, referenceMonth: ReferenceMonth) {
+    this.id = identity;
+    this.referenceMonth = referenceMonth;
+    this._status = ChargeStatus.ANALYSIS;
+  }
 
-    get status() {
-        return this._status;
-    }
+  get status() {
+    return this._status;
+  }
 }

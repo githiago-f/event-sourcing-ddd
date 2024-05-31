@@ -10,8 +10,8 @@ export class SaleEventSourcingHandler implements EventSourcingHandler<SaleAggreg
   }
 
   async findById(aggregateId: UUID): Promise<SaleAggregate> {
-    const aggregate = new SaleAggregate(undefined, aggregateId);
     const events = await this._eventStore.getEvents(aggregateId);
+    const aggregate = new SaleAggregate(undefined, aggregateId);
     aggregate.replay(events);
     return aggregate;
   }

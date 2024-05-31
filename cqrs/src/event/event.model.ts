@@ -32,7 +32,7 @@ export class EventModel {
 
   public toEventType<T extends BaseEvent>(): T {
     if(!BaseEvent.events.has(this.eventType)) {
-      throw new Error('Undefiend event');
+      throw new Error(`Undefined event, check if the event ${this.eventType} is annotated with @EventImpl`);
     }
     const eventType = BaseEvent.events.get(this.eventType)!;
     const fromString = JSON.parse(this.eventData);

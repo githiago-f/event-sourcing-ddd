@@ -12,7 +12,6 @@ export abstract class AggregateRoot {
 
   constructor(id = randomUUID()) {
     this.id = id;
-    this._version = 1;
     this._changes = [];
   }
 
@@ -43,7 +42,7 @@ export abstract class AggregateRoot {
    */
   protected applyChange(event: BaseEvent, isNewEvent = false) {
     try {
-      if(this.version < event.version) {
+      if(event.version && this.version < event.version) {
         this._version = event.version;
       }
       getHandlerMethod(this, event.name)?.call(this, event);
@@ -66,8 +65,8 @@ export abstract class AggregateRoot {
     return this.applyChange(event, true);
   }
 
-  public replay(events?: Array<BaseEvent>) {
-    return (events??this._changes).forEach((change) => this.applyChange(change));
+  public replay(events: Array<BaseEvent>) {
+    events.forEach((change) => this.applyChange(change));
   }
 
   toJSON() {

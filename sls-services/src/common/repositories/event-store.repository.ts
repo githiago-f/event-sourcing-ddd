@@ -11,9 +11,10 @@ export class EventStoreRepository implements EventRepository {
     const data = await this._MODEL.query('aggregateId')
       .eq(aggregateId)
       .all()
-      .exec();
-    console.log(`Found ${data.count} events`);
-    return data.map(i => plainToInstance(EventModel, i));
+      .exec()
+      .then(res => res.toJSON());
+    const events = data.map(i => plainToInstance(EventModel, i));
+    return events;
   }
 
   async save(event: EventModel): Promise<void> {
@@ -23,12 +24,13 @@ export class EventStoreRepository implements EventRepository {
   }
 
   async findLastEventByAggregateId(aggregateId: UUID): Promise<EventModel | undefined> {
+    // .sort not working :(
+    // check if RANGE key is needed
     const data = await this._MODEL.query('aggregateId')
       .eq(aggregateId)
-      .sort('ascending')
-      .all()
       .exec();
-    console.log(`Found ${data.count} events`);
-    return plainToInstance(EventModel, data.at(-1)?.toJSON());
+    const res = data.toJSON().sort((a, b) => a.version - b.version);
+    console.log(res);
+    return plainToInstance(EventModel, res.pop());
   }
 }

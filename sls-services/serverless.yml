@@ -52,7 +52,7 @@ resources:
               - AttributeName: aggregateId
                 KeyType: HASH
             Projection:
-              ProjectionType: KEYS_ONLY
+              ProjectionType: ALL
             ProvisionedThroughput:
               ReadCapacityUnits: 1
               WriteCapacityUnits: 1
@@ -60,7 +60,5 @@ resources:
 functions:
   NewSale:
     handler: .build/functions/NewSale/handler.handler
-    events:
-      - httpApi:
-          path: /sales
-          method: GET
+  ChargeReturnHandler:
+    handler: .build/functions/ChargeReturnHandler/handler.handler
