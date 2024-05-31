@@ -4,9 +4,9 @@ import dynamoose from 'dynamoose';
 const eventSchema = new dynamoose.Schema({
   id: { type: String, required: true, hashKey: true },
   version: { type: Number, rangeKey: true },
-  aggregateId: { type: String },
+  aggregateId: { type: String, index: { name: 'AggregateIdIndex' } },
   aggregateType: String,
-  createdAt: { type: {value: Date, settings: { value: "iso" }} },
+  createdAt: { type: {value: Date, settings: { storage: "iso" }} },
   eventData: String,
   eventType: String,
 });

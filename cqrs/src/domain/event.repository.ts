@@ -8,4 +8,5 @@ import { EventModel } from "../event/event.model.js";
 export interface EventRepository {
   save(event: EventModel): Promise<void>;
   findByAggregateId(aggregateId: UUID): Promise<EventModel[]>;
+  findLastEventByAggregateId(aggregateId: UUID): Promise<EventModel | undefined>;
 }

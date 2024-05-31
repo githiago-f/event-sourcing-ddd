@@ -35,6 +35,8 @@ resources:
             AttributeType: S
           - AttributeName: version
             AttributeType: 'N'
+          - AttributeName: aggregateId
+            AttributeType: S
         KeySchema:
           - AttributeName: id
             KeyType: HASH
@@ -44,6 +46,16 @@ resources:
           ReadCapacityUnits: 1
           WriteCapacityUnits: 1
         BillingMode: PROVISIONED
+        GlobalSecondaryIndexes:
+          - IndexName: AggregateIdIndex
+            KeySchema:
+              - AttributeName: aggregateId
+                KeyType: HASH
+            Projection:
+              ProjectionType: KEYS_ONLY
+            ProvisionedThroughput:
+              ReadCapacityUnits: 1
+              WriteCapacityUnits: 1
 
 functions:
   NewSale:

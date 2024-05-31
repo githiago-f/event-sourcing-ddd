@@ -11,4 +11,9 @@ export class EventStoreInMemoryRespository implements EventRepository {
   async save(event: EventModel): Promise<void> {
     this._events.push(event);
   }
+
+  async findLastEventByAggregateId(aggregateId: UUID): Promise<EventModel | undefined> {
+    const events = await this.findByAggregateId(aggregateId);
+    return events.sort((a, b) => a.version - b.version).pop();
+  }
 }

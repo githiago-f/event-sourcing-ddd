@@ -10,7 +10,7 @@
   },
   "scripts": {
     "sls": "yarn workspace sls-services sls",
-    "build": "yarn workspace cqrs build && yarn workspace sale-core build",
+    "build": "yarn workspace cqrs build && yarn workspace sale-core build && yarn workspace sls-services build",
     "deploy": "yarn workspace sls-services sls deploy --stage develop"
   },
   "workspaces": [

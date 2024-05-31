@@ -1,6 +1,6 @@
 import "reflect-metadata";
 import { BaseEvent } from "../event/base.event.js";
-import { InvalidMethodException } from "./invalid-method.exception.js";
+import { InvalidMethodException } from "../errors/invalid-method.exception.js";
 
 const applyMetadataKey = Symbol("apply-aggregate-event");
 

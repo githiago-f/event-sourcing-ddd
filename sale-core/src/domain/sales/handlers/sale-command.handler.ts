@@ -11,12 +11,6 @@ export class SaleCommandHandler {
 
   async handleNewSale(command: NewSaleCommand) {
     const aggregate = new SaleAggregate(command);
-    this._eventSourcingHandler.save(aggregate);
+    return this._eventSourcingHandler.save(aggregate);
   }
-
-  handleChargeIncluded() {
-    // TODO update sale to billing state if possible
-  }
-
-  handleChargeBilled() {}
 }

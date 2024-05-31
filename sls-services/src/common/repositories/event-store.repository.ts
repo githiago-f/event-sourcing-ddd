@@ -8,7 +8,8 @@ export class EventStoreRepository implements EventRepository {
 
   async findByAggregateId(aggregateId: UUID): Promise<EventModel[]> {
     console.log('Searching events');
-    const data = await this._MODEL.query('id').eq(aggregateId)
+    const data = await this._MODEL.query('aggregateId')
+      .eq(aggregateId)
       .all()
       .exec();
     console.log(`Found ${data.count} events`);
@@ -19,5 +20,15 @@ export class EventStoreRepository implements EventRepository {
     console.log("Persisting event");
     await this._MODEL.create(event);
     console.log("Event persisted");
+  }
+
+  async findLastEventByAggregateId(aggregateId: UUID): Promise<EventModel | undefined> {
+    const data = await this._MODEL.query('aggregateId')
+      .eq(aggregateId)
+      .sort('ascending')
+      .all()
+      .exec();
+    console.log(`Found ${data.count} events`);
+    return plainToInstance(EventModel, data.at(-1)?.toJSON());
   }
 }
