@@ -24,13 +24,15 @@ export class EventStoreRepository implements EventRepository {
   }
 
   async findLastEventByAggregateId(aggregateId: UUID): Promise<EventModel | undefined> {
-    // .sort not working :(
-    // check if RANGE key is needed
+    /**
+     * This is using sort descending but its not
+     * sorting by the range key...
+     */
     const data = await this._MODEL.query('aggregateId')
       .eq(aggregateId)
+      .sort('descending')
       .exec();
-    const res = data.toJSON().sort((a, b) => a.version - b.version);
-    console.log(res);
+    const res = data.toJSON().sort((a,b)=>a.version-b.version);
     return plainToInstance(EventModel, res.pop());
   }
 }

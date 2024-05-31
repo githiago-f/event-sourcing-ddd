@@ -42,7 +42,8 @@ export abstract class AggregateRoot {
    */
   protected applyChange(event: BaseEvent, isNewEvent = false) {
     try {
-      if(event.version && this.version < event.version) {
+      console.debug(`Applying event version: ${event.version}`);
+      if(event.version !== undefined && this.version <= event.version) {
         this._version = event.version;
       }
       getHandlerMethod(this, event.name)?.call(this, event);
@@ -66,7 +67,7 @@ export abstract class AggregateRoot {
   }
 
   public replay(events: Array<BaseEvent>) {
-    events.forEach((change) => this.applyChange(change));
+    events.forEach((event) => this.applyChange(event));
   }
 
   toJSON() {

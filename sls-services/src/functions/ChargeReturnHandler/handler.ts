@@ -1,31 +1,27 @@
-import { APIGatewayEvent } from "aws-lambda";
+import { SQSBatchItemFailure, SQSBatchResponse, SQSEvent } from "aws-lambda";
 import { EventStore } from "cqrs";
 import { EventStoreRepository } from "../../common/repositories/event-store.repository.js";
 import { SaleCommandHandler, SaleEventSourcingHandler } from "sale-core";
-import { plainToInstance } from "class-transformer";
-import { ChargeInsertionCommand } from "sale-core/dist/commands/charge-insertion.command.js";
-import { randomUUID } from "crypto";
+import { validateInput } from "../../common/infra/helpers/validate-input.js";
+import { ChargeInsertionRequest } from "./dto/charge-insertion.request.js";
 
 const eventStore = new EventStore(new EventStoreRepository(), 'SaleAggregate');
 const eventSourcingHandler = new SaleEventSourcingHandler(eventStore);
 
 const saleCommandHandler = new SaleCommandHandler(eventSourcingHandler);
 
-export async function handler(event: APIGatewayEvent) {
-  try {
-    const command = plainToInstance(ChargeInsertionCommand, {
-      id: '37e63663-8419-4657-97e4-718575818333',
-      chargeId: randomUUID(),
-      referenceMonth: '05/2024'
-    });
-
-    const result = await saleCommandHandler.handleCharge(command);
-
-    return {
-      statusCode: 201,
-      body: JSON.stringify(result)
-    };
-  } catch(e) {
-    console.error(e);
+export async function handler(event: SQSEvent): Promise<SQSBatchResponse> {
+  const batchItemFailures: SQSBatchItemFailure[] = [];
+  for (const message of event.Records) {
+    try {
+      const request = await validateInput<ChargeInsertionRequest>(
+        JSON.parse(message.body!),
+        ChargeInsertionRequest
+      );
+      await saleCommandHandler.handleCharge(request.toCommand());
+    } catch(e) {
+      batchItemFailures.push({ itemIdentifier: message.messageId });
+    }
   }
+  return { batchItemFailures };
 }

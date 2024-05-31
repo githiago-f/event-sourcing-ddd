@@ -1,0 +1,16 @@
+{
+  "Records": [
+    {
+      "messageId": "invalid-reference-month",
+      "body": "{\"saleId\": \"c07a5359-e11f-4fea-9fda-fefee59cd76c\", \"chargeId\": \"a8f517a0-b3bc-4232-b883-78814532a9db\", \"referenceMonth\": \"2020-02-01\"}"
+    },
+    {
+      "messageId": "success-id",
+      "body": "{\"saleId\": \"c07a5359-e11f-4fea-9fda-fefee59cd76c\", \"chargeId\": \"dd89b04f-d5be-4242-a730-41b485843998\", \"referenceMonth\": \"02/2020\"}"
+    },
+    {
+      "messageId": "duplication",
+      "body":"{\"saleId\": \"c07a5359-e11f-4fea-9fda-fefee59cd76c\", \"chargeId\": \"dd89b04f-d5be-4242-a730-41b485843998\", \"referenceMonth\": \"02/2020\"}"
+    }
+  ]
+}

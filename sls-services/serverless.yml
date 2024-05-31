@@ -26,21 +26,22 @@ plugins:
 
 resources:
   Resources:
+    # should be using version as internal range key.
     EventStoreTable:
       Type: AWS::DynamoDB::Table
       Properties:
         TableName: ${self:provider.environment.EVENT_STORE}
         AttributeDefinitions:
           - AttributeName: id
-            AttributeType: S
-          - AttributeName: version
-            AttributeType: 'N'
+            AttributeType: 'S'
+          - AttributeName: createdAt
+            AttributeType: 'S'
           - AttributeName: aggregateId
-            AttributeType: S
+            AttributeType: 'S'
         KeySchema:
           - AttributeName: id
             KeyType: HASH
-          - AttributeName: version
+          - AttributeName: createdAt
             KeyType: RANGE
         ProvisionedThroughput:
           ReadCapacityUnits: 1
