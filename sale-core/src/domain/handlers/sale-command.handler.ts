@@ -1,13 +1,14 @@
-import { EventSourcingHandler } from "cqrs";
+import { Injectable } from "cqrs";
 import { SaleAggregate } from "../sale.js";
 import { NewSaleCommand } from "../../commands/new-sale.command.js";
-import { UUID } from "crypto";
 import { InsertChargeLogCommand } from "../../commands/charge-insertion.command.js";
+import { SaleEventSourcingHandler } from "./sale-event-sourcing.handler.js";
 
+@Injectable()
 export class SaleCommandHandler {
-  private readonly _eventSourcingHandler: EventSourcingHandler<SaleAggregate>;
+  private readonly _eventSourcingHandler: SaleEventSourcingHandler;
 
-  constructor(eventSourcingHandler: EventSourcingHandler<SaleAggregate>) {
+  constructor(eventSourcingHandler: SaleEventSourcingHandler) {
     this._eventSourcingHandler = eventSourcingHandler;
   }
 

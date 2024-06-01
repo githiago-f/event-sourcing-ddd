@@ -1,4 +1,3 @@
-import "reflect-metadata";
 import { BaseEvent } from "../event/base.event.js";
 import { InvalidMethodException } from "../errors/invalid-method.exception.js";
 

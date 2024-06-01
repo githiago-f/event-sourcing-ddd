@@ -7,6 +7,7 @@ import { InsertChargeLogEvent } from "./events/charge-insertion.event.js";
 import { NewSaleCommand } from "../commands/new-sale.command.js";
 import { InsertChargeLogCommand } from "../commands/charge-insertion.command.js";
 import { InvalidChargeLogInsertionException } from "./errors/invalid-chargelog-insertion.expection.js";
+import { InvalidParameterException } from "./errors/invalid-parameter.exception.js";
 
 export class SaleAggregate extends AggregateRoot {
   private _status!: SaleStatus;
@@ -19,6 +20,15 @@ export class SaleAggregate extends AggregateRoot {
     super(id);
     this._chargeHistory = new Set();
     if(command !== undefined) {
+      if(command.instalationId === undefined) {
+        throw new InvalidParameterException('instalationId');
+      }
+      if(command.recipientId === undefined) {
+        throw new InvalidParameterException('recipientId');
+      }
+      if(command.productCode === undefined) {
+        throw new InvalidParameterException('productCode');
+      }
       this.raiseEvent(NewSaleEvent.fromCommand(command));
     }
   }

@@ -1,15 +1,27 @@
-import { UUID } from "crypto";
+import { type UUID } from "crypto";
 import { BaseEvent } from "../event/base.event.js";
-import { EventRepository } from "./event.repository.js";
 import { EventModel } from "../event/event.model.js";
+import { EventRepository } from "./event.repository.js";
+import { Injectable } from '../decorators/injectable.js';
 import { ConcurrencyException } from "../errors/concurrency-exception.js";
-import { EventPropagator } from "../event/event.propagator.js";
 import { EventsNotFoundException } from "../errors/events-not-found.exception.js";
 
+export const EVENT_STORE_KEY = 'EventStore';
+
+/**
+ * In order to use your implemention of `EventRepository` you have
+ * to instantiate this by yourself and register into the `IoCContainer`.
+ *
+ * Usage example:
+ * ```ts
+ * const eventStore = new EventStore(new EventRepositoryImpl(), 'AggregateType');
+ * IoCContainer.instance.register(EVENT_STORE_KEY, eventStore);
+ * ```
+ */
+@Injectable({ key: EVENT_STORE_KEY })
 export class EventStore {
   private readonly _aggregateType: string;
   private readonly _eventRepository: EventRepository;
-  private readonly _eventPopagator = EventPropagator.instance;
 
   constructor(eventRepository: EventRepository, aggregateType: string) {
     this._eventRepository = eventRepository;
@@ -28,7 +40,6 @@ export class EventStore {
       const aggregateData = { aggregateId, aggregateType: this._aggregateType };
       const eventModel = EventModel.fromEvent(aggregateData, event);
       await this._eventRepository.save(eventModel);
-      this._eventPopagator.emit(event);
     }
   }
 

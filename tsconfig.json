@@ -3,16 +3,15 @@
 	  "target": "ESNext", /* Specify ECMAScript target version: 'ES3' (default), 'ES5', 'ES2015', 'ES2016', 'ES2017', 'ES2018', 'ES2019', 'ES2020', 'ES2021', or 'ESNEXT'. */
 		"module": "Node16", /* Specify module code generation: 'none', 'commonjs', 'amd', 'system', 'umd', 'es2015', 'es2020', or 'ESNext'. */
 		"sourceMap": true,                           /* Generates corresponding '.map' file. */
-		"removeComments": true,                      /* Do not emit comments to output. */
-		// "isolatedModules": true,                     /* Transpile each file as a separate module (similar to 'ts.transpileModule'). */
-		"strict": true, /* Enable all strict type-checking options. */
+		"removeComments": false,                      /* Do not emit comments to output. */
 		"moduleResolution": "Node16", /* Specify module resolution strategy: 'node' (Node.js) or 'classic' (TypeScript pre-1.6). */
 		"allowSyntheticDefaultImports": true,        /* Allow default imports from modules with no default export. This does not affect code emit, just typechecking. */
     "esModuleInterop": true, /* Enables emit interoperability between CommonJS and ES Modules via creation of namespace objects for all imports. Implies 'allowSyntheticDefaultImports'. */
 		"experimentalDecorators": true,              /* Enables experimental support for ES7 decorators. */
 		"emitDecoratorMetadata": true,               /* Enables experimental support for emitting type metadata for decorators. */
 		"skipLibCheck": true, /* Skip type checking of declaration files. */
-		"forceConsistentCasingInFileNames": true /* Disallow inconsistently-cased references to the same file. */
+		"forceConsistentCasingInFileNames": true, /* Disallow inconsistently-cased references to the same file. */
+    "declaration": true
 	},
 	"exclude": [
 		"**/node_modules",

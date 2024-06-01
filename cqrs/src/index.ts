@@ -1,11 +1,7 @@
+import "reflect-metadata";
 export * from './event/base.event.js';
 export * from './event/event.model.js';
-export * from './domain/event-sourcing.handler.js';
-export * from './domain/aggregate-root.js';
-export * from './domain/event.repository.js';
-export * from './domain/event-store.service.js';
-export * from './decorators/aggregate-methods.js';
-export * from './decorators/event.js';
-export * from './decorators/post-handler.js';
 export * from './command/base.command.js';
+export * from './core/index.js';
 export * from './errors/index.js';
+export * from './decorators/index.js';

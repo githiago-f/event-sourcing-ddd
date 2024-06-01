@@ -11,8 +11,7 @@ export class SaleRequest {
   public readonly recipientId!: UUID;
 
   @IsUUID()
-  @IsOptional()
-  public readonly financialResponsibleId!: UUID;
+  public readonly instalationId!: UUID;
 
   toCommand() {
     return plainToInstance(NewSaleCommand, this);

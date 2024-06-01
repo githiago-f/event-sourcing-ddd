@@ -1,6 +1,10 @@
 import { ClassConstructor, plainToInstance } from "class-transformer";
 import { BaseEvent } from "../event/base.event.js"
 
+/**
+ * Mark `BaseEvent` implementions with this
+ * decorator so it will be recreated after persisting.
+ */
 export function EventImpl(): ClassDecorator {
   return (target) => {
     const Target = target as unknown as ClassConstructor<BaseEvent>;

@@ -1,7 +1,8 @@
 import { UUID } from "crypto";
 import { SaleAggregate } from "../sale.js";
-import { EventStore, EventSourcingHandler } from "cqrs";
+import { EventStore, EventSourcingHandler, Injectable } from "cqrs";
 
+@Injectable()
 export class SaleEventSourcingHandler implements EventSourcingHandler<SaleAggregate> {
   private readonly _eventStore: EventStore;
 
