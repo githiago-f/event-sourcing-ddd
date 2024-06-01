@@ -1,8 +1,8 @@
 import { EventSourcingHandler } from "cqrs";
 import { SaleAggregate } from "../sale.js";
-import { NewSaleCommand } from "../../../commands/new-sale.command.js";
+import { NewSaleCommand } from "../../commands/new-sale.command.js";
 import { UUID } from "crypto";
-import { ChargeInsertionCommand } from "../../../commands/charge-insertion.command.js";
+import { InsertChargeLogCommand } from "../../commands/charge-insertion.command.js";
 
 export class SaleCommandHandler {
   private readonly _eventSourcingHandler: EventSourcingHandler<SaleAggregate>;
@@ -16,9 +16,9 @@ export class SaleCommandHandler {
     return this._eventSourcingHandler.save(aggregate);
   }
 
-  async handleCharge(command: ChargeInsertionCommand) {
+  async handleCharge(command: InsertChargeLogCommand) {
     const aggregate = await this._eventSourcingHandler.findById(command.id);
-    aggregate.addCharge(command.chargeId, command.referenceMonth);
+    aggregate.includeChargeLog(command);
     return this._eventSourcingHandler.save(aggregate);
   }
 }

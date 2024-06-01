@@ -2,7 +2,7 @@ import { type UUID } from "crypto";
 import { plainToInstance } from "class-transformer";
 import { IsNotEmpty, IsString, IsUUID, Matches } from "class-validator";
 import { type ReferenceMonth } from "sale-core/dist/domain/sales/vo/reference-month.js";
-import { ChargeInsertionCommand } from "sale-core/dist/commands/charge-insertion.command.js";
+import { InsertChargeLogCommand } from "sale-core/dist/commands/charge-insertion.command.js";
 
 export class ChargeInsertionRequest {
   @IsUUID()
@@ -14,10 +14,10 @@ export class ChargeInsertionRequest {
   public readonly referenceMonth!: ReferenceMonth;
 
   public toCommand() {
-    return plainToInstance(ChargeInsertionCommand, {
+    return plainToInstance(InsertChargeLogCommand, {
       id: this.saleId,
       chargeId: this.chargeId,
-      referenceMonth: this.referenceMonth
-    });
+      referenceMonth: this.referenceMonth,
+    } as InsertChargeLogCommand);
   }
 }

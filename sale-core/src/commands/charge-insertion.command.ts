@@ -1,9 +1,13 @@
 import { BaseCommand } from "cqrs";
-import { UUID } from "crypto";
-import { ReferenceMonth } from "../domain/sales/vo/reference-month.js";
+import { ReferenceMonth } from "../domain/vo/reference-month.js";
+import { ChargeStatus } from "../domain/vo/charge-status.js";
 
-export class ChargeInsertionCommand extends BaseCommand {
-  public readonly name = 'ChargeInsertionCommand';
-  public readonly chargeId!: UUID;
+export class InsertChargeLogCommand extends BaseCommand {
+  public readonly name = 'InsertChargeLogCommand';
+  /**
+   * may not be UUID
+   */
+  public readonly chargeId!: string;
+  public readonly status?: ChargeStatus;
   public readonly referenceMonth!: ReferenceMonth;
 }
