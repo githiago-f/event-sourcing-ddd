@@ -1,6 +1,6 @@
 {
   "private": true,
-  "name": "nodejs-typescript",
+  "name": "sales",
   "version": "1.0.0",
   "description": "",
   "main": "index.ts",
@@ -9,14 +9,17 @@
     "node": "^20.12.2"
   },
   "scripts": {
-    "sls": "yarn workspace sls-services sls",
-    "build": "yarn workspace cqrs build && yarn workspace sale-core build && yarn workspace sls-services build",
-    "deploy": "yarn workspace sls-services sls deploy --stage develop"
+    "core": "yarn workspace sales-core",
+    "common": "yarn workspace sales-common",
+    "lambda": "yarn workspace sales-lambda",
+    "sls": "yarn lambda sls",
+    "build": "yarn common build && yarn core build && yarn lambda build",
+    "deploy": "yarn lambda sls deploy --stage develop"
   },
   "workspaces": [
-    "sls-services",
-    "cqrs",
-    "sale-core"
+    "sales-lambda",
+    "sales-common",
+    "sales-core"
   ],
   "author": "github@githiago-f",
   "license": "ISC"

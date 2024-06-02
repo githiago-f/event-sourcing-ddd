@@ -1,0 +1,24 @@
+{
+  "name": "sales-core",
+  "version": "1.0.0",
+  "description": "",
+  "main": "dist/index.js",
+  "type": "module",
+  "scripts": {
+    "build": "npx tsc"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "cross-env": "5.0.5",
+    "sales-common": "1.0.0",
+    "class-transformer": "^0.5.1",
+    "reflect-metadata": "^0.2.2",
+    "typescript": "^5.4.5"
+  },
+  "devDependencies": {
+    "@types/node": "^20.10.0",
+    "tsx": "^4.7.1"
+  }
+}
