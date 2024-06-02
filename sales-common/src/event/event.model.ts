@@ -20,7 +20,7 @@ export class EventModel {
   public static fromEvent<T extends BaseEvent>(aggregate: AggregateData, event: T): EventModel {
     const eventData = instanceToPlain(event);
     return plainToInstance(EventModel, {
-      id: randomUUID(),
+      id: event.id,
       aggregateId: aggregate.aggregateId,
       createdAt: new Date(),
       aggregateType: aggregate.aggregateType,

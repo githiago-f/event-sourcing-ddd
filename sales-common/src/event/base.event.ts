@@ -1,5 +1,5 @@
 import { ClassConstructor } from "class-transformer";
-import { UUID } from "crypto";
+import { UUID, randomUUID } from "crypto";
 
 export abstract class BaseEvent {
   public readonly id!: UUID;
@@ -7,4 +7,8 @@ export abstract class BaseEvent {
   public version!: number;
 
   static events = new Map<string, ClassConstructor<any>>();
+
+  constructor(id?: UUID) {
+    this.id = id ?? randomUUID();
+  }
 }
