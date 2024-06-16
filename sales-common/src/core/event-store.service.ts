@@ -3,8 +3,7 @@ import { BaseEvent } from "../event/base.event.js";
 import { EventModel } from "../event/event.model.js";
 import { EventRepository } from "./event.repository.js";
 import { Injectable } from '../decorators/injectable.js';
-import { ConcurrencyException } from "../errors/concurrency-exception.js";
-import { EventsNotFoundException } from "../errors/events-not-found.exception.js";
+import { ConcurrencyException, EventsNotFoundException } from "../errors/index.js";
 
 export const EVENT_STORE_KEY = 'EventStore';
 

@@ -1,5 +1,6 @@
 import { ClassConstructor } from "class-transformer";
 import { instanceKey } from "../decorators/injectable.js";
+import { NotInjectableException, UniqueInstanceException } from "../errors/index.js";
 export const injectableKey = Symbol("injectable-key");
 
 export class IoCContainer {
@@ -8,7 +9,7 @@ export class IoCContainer {
 
   register(key: string, instance: InstanceType<any>) {
     if(this.instances.has(key)) {
-      throw new Error('There is already a instance for ' + key);
+      throw new UniqueInstanceException(key);
     }
     this.instances.set(key, instance);
   }
@@ -16,7 +17,7 @@ export class IoCContainer {
   get<T>(target: ClassConstructor<T>): T {
     const isInjectable = Reflect.getMetadata(injectableKey, target);
     if(!isInjectable) {
-      throw new Error(target.name + ' is not injectable');
+      throw new NotInjectableException(target.name);
     }
 
     const key = Reflect.getMetadata(instanceKey, target) ?? target.name;
