@@ -19,14 +19,20 @@ export class IoCContainer {
       throw new Error(target.name + ' is not injectable');
     }
 
-    const key = Reflect.getMetadata(instanceKey, target);
+    const key = Reflect.getMetadata(instanceKey, target) ?? target.name;
     if(this.instances.has(key)) {
       return this.instances.get(key);
     }
 
-    const paramTypes = Reflect.getMetadata("design:paramtypes", target);
-    const dependencies = (paramTypes ?? []).map((dep: ClassConstructor<any>) =>this.get(dep));
+    return this.makeNewInstance<T>(target);
+  }
 
-    return Reflect.construct(target, dependencies);
+  private makeNewInstance<T>(target: ClassConstructor<T>) {
+    const paramTypes = Reflect.getMetadata("design:paramtypes", target);
+    const dependencies = (paramTypes ?? []).map(this.get.bind(this));
+
+    const instance = Reflect.construct(target, dependencies);
+    this.instances.set(target.name, instance);
+    return instance;
   }
 }

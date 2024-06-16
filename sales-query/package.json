@@ -1,0 +1,20 @@
+{
+  "name": "sales-query",
+  "version": "1.0.0",
+  "description": "Connects to the reading database and persists events into projections",
+  "main": "dist/index.js",
+  "author": "githiago-f",
+  "license": "MIT",
+  "scripts": {
+    "build": "npx tsc"
+  },
+  "dependencies": {
+    "class-transformer": "^0.5.1",
+    "cross-env": "5.0.5"
+  },
+  "devDependencies": {
+    "@types/node": "^20.10.0",
+    "tsx": "^4.7.1",
+    "typescript": "^5.4.5"
+  }
+}

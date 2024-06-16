@@ -1,7 +1,7 @@
 import { type UUID } from "crypto";
-import { IsOptional, IsString, IsUUID } from "class-validator";
+import { IsString, IsUUID } from "class-validator";
 import { plainToInstance } from "class-transformer";
-import { NewSaleCommand } from "../../../../../sales-core/dist/index.js";
+import { NewSaleCommand } from "sales-core";
 
 export class SaleRequest {
   @IsString()

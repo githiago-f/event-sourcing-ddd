@@ -1,8 +1,7 @@
 import { type UUID } from "crypto";
 import { plainToInstance } from "class-transformer";
 import { IsNotEmpty, IsString, IsUUID, Matches } from "class-validator";
-import { type ReferenceMonth } from "sales-core/dist/domain/sales/vo/reference-month.js";
-import { InsertChargeLogCommand } from "sales-core/dist/commands/charge-insertion.command.js";
+import { InsertChargeLogCommand, type ReferenceMonth } from "sales-core";
 
 export class ChargeInsertionRequest {
   @IsUUID()

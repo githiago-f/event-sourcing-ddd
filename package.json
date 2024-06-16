@@ -12,14 +12,16 @@
     "core": "yarn workspace sales-core",
     "common": "yarn workspace sales-common",
     "lambda": "yarn workspace sales-lambda",
+    "query": "yarn workspace sales-query",
     "sls": "yarn lambda sls",
-    "build": "yarn common build && yarn core build && yarn lambda build",
+    "build": "yarn common build && yarn core build && yarn query build && yarn lambda build",
     "deploy": "yarn lambda sls deploy --stage develop"
   },
   "workspaces": [
     "sales-lambda",
     "sales-common",
-    "sales-core"
+    "sales-core",
+    "sales-query"
   ],
   "author": "github@githiago-f",
   "license": "ISC"
