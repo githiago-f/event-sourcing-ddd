@@ -1,7 +1,7 @@
 import { IoCContainer } from '../../core';
 import { StrategyFactory } from '../../core/patterns/strategy.factory';
 import { Injectable } from './injectable';
-import { Strategy } from '../strategy';
+import { Strategy } from './strategy';
 
 abstract class BaseStrategy {
   abstract myMethod(): void;
