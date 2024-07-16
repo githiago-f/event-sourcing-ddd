@@ -1,9 +1,9 @@
 import { type UUID } from "crypto";
-import { BaseEvent } from "../event/base.event.js";
-import { EventModel } from "../event/event.model.js";
-import { EventRepository } from "./event.repository.js";
-import { Injectable } from '../decorators/injectable.js';
-import { ConcurrencyException, EventsNotFoundException } from "../errors/index.js";
+import { BaseEvent } from "../event/base.event";
+import { EventModel } from "../event/event.model";
+import { EventRepository } from "./event.repository";
+import { Injectable } from '../decorators/injectable';
+import { ConcurrencyException, EventsNotFoundException } from "../errors/index";
 
 export const EVENT_STORE_KEY = 'EventStore';
 

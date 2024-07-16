@@ -1,3 +1,3 @@
-export * from './event.js';
-export * from './aggregate-methods.js';
-export * from './injectable.js';
+export * from './event';
+export * from './aggregate-methods';
+export * from './injectable';

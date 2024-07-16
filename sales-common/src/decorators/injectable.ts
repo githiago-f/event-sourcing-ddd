@@ -1,4 +1,5 @@
-import { injectableKey } from "../core/ioc-container.js";
+import "reflect-metadata";
+import { injectableKey } from "../core/ioc-container";
 
 type Options = {
   key?: string;

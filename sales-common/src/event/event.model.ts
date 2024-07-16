@@ -1,5 +1,5 @@
 import { UUID, randomUUID } from "crypto";
-import { BaseEvent } from "./base.event.js";
+import { BaseEvent } from "./base.event";
 import { instanceToPlain, plainToInstance } from "class-transformer";
 
 type AggregateData = {

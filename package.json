@@ -4,7 +4,6 @@
   "version": "1.0.0",
   "description": "",
   "main": "index.ts",
-  "type": "module",
   "engines": {
     "node": "^20.12.2"
   },

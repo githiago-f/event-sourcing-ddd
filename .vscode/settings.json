@@ -10,5 +10,6 @@
     "**/.build": true,
     "**/.serverless": true,
     "*/node_modules": true
-  }
+  },
+  "jest.jestCommandLine": "npm run test"
 }

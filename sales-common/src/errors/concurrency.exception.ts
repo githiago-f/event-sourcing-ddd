@@ -1,4 +1,4 @@
-import { BaseEvent } from "../event/base.event.js";
+import { BaseEvent } from "../event/base.event";
 
 export class ConcurrencyException extends Error {
   constructor(public readonly events: BaseEvent[]) {
