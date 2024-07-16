@@ -1,9 +1,9 @@
 import { IoCContainer } from "sales-common";
 import { APIGatewayEvent } from "aws-lambda";
 import { SaleCommandHandler, SaleAggregate } from 'sales-core';
-import { SaleRequest } from "./dto/sale-request.js";
-import { validateInput } from "../../common/infra/helpers/validate-input.js";
-import { makeEventStoreFor } from "../../common/infra/dynamoose/event-store.include.js";
+import { SaleRequest } from "./dto/sale-request";
+import { validateInput } from "../../common/infra/helpers/validate-input";
+import { makeEventStoreFor } from "../../common/infra/dynamoose/event-store.include";
 
 makeEventStoreFor(SaleAggregate);
 const saleCommandHandler = IoCContainer.instance.get(SaleCommandHandler);
