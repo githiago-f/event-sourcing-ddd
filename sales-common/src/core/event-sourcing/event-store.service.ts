@@ -4,6 +4,7 @@ import { EventModel } from "../../event/event.model";
 import { EventRepository } from "./event.repository";
 import { Injectable } from '../../decorators/patterns/injectable';
 import { ConcurrencyException, EventsNotFoundException } from "../../errors/index";
+import { EventDispatcher } from "./event.dispatcher";
 
 export const EVENT_STORE_KEY = 'EventStore';
 
@@ -21,10 +22,12 @@ export const EVENT_STORE_KEY = 'EventStore';
 export class EventStore {
   private readonly _aggregateType: string;
   private readonly _eventRepository: EventRepository;
+  private readonly _eventDispatcher: EventDispatcher;
 
-  constructor(eventRepository: EventRepository, aggregateType: string) {
+  constructor(eventRepository: EventRepository, eventDispatcher: EventDispatcher, aggregateType: string) {
     this._eventRepository = eventRepository;
     this._aggregateType = aggregateType;
+    this._eventDispatcher = eventDispatcher;
   }
 
   async saveEvents(aggregateId: UUID, events: BaseEvent[], expectedVersion = -1) {
@@ -39,6 +42,7 @@ export class EventStore {
       const aggregateData = { aggregateId, aggregateType: this._aggregateType };
       const eventModel = EventModel.fromEvent(aggregateData, event);
       await this._eventRepository.save(eventModel);
+      await this._eventDispatcher.dispatch(event);
     }
   }
 

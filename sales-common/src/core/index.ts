@@ -4,3 +4,4 @@ export { EventStore, EVENT_STORE_KEY } from './event-sourcing/event-store.servic
 export { EventRepository } from './event-sourcing/event.repository';
 export { StrategyFactory } from './patterns/strategy.factory';
 export { IoCContainer } from './patterns/ioc-container';
+export { EventDispatcher } from './event-sourcing/event.dispatcher';

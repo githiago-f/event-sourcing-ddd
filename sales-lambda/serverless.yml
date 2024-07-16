@@ -20,6 +20,8 @@ provider:
           Resource: arn:aws:dynamodb:${aws:region}:${aws:accountId}:table/${self:provider.environment.EVENT_STORE}
   environment:
     EVENT_STORE: sales_event_store
+    REGION: ${self:provider.region}
+    EVENT_BUS_NAME: sales-event-bus
 
 plugins:
   - serverless-plugin-monorepo
