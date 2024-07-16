@@ -1,6 +1,6 @@
 import "reflect-metadata";
-import { AbstractClass } from "../utils/abstract-class.type";
-import { injectableKey } from "../core/ioc-container";
+import { AbstractClass } from "../../utils/abstract-class.type";
+import { injectableKey } from "../../core/patterns/ioc-container";
 
 export type StrategyOptions = {
   key: string;

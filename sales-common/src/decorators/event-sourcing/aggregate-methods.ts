@@ -1,5 +1,5 @@
-import { BaseEvent } from "../event/base.event";
-import { InvalidMethodException } from "../errors/invalid-method.exception";
+import { BaseEvent } from "../../event/base.event";
+import { InvalidMethodException } from "../../errors/invalid-method.exception";
 
 const applyMetadataKey = Symbol("apply-aggregate-event");
 

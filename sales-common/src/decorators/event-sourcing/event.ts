@@ -1,5 +1,5 @@
 import { ClassConstructor, plainToInstance } from "class-transformer";
-import { BaseEvent } from "../event/base.event"
+import { BaseEvent } from "../../event/base.event"
 
 /**
  * Mark `BaseEvent` implementions with this

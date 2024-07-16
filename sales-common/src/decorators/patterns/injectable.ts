@@ -1,5 +1,5 @@
 import "reflect-metadata";
-import { injectableKey } from "../core/ioc-container";
+import { injectableKey } from "../../core/patterns/ioc-container";
 
 type Options = {
   key?: string;

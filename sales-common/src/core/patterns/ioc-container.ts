@@ -1,9 +1,9 @@
 import "reflect-metadata";
 import { ClassConstructor } from "class-transformer";
-import { instanceKey } from "../decorators/injectable";
-import { NotInjectableException, UniqueInstanceException } from "../errors/index";
-import { AbstractClass } from "../utils/abstract-class.type";
-import { strategyKey } from "../decorators/strategy";
+import { instanceKey } from "../../decorators/patterns/injectable";
+import { NotInjectableException, UniqueInstanceException } from "../../errors/index";
+import { AbstractClass } from "../../utils/abstract-class.type";
+import { strategyKey } from "../../decorators/patterns/strategy";
 export const injectableKey = Symbol("injectable-key");
 
 type StrategiesField = Map<AbstractClass, Record<string, Function>>;

@@ -1,5 +1,5 @@
-import { Injectable } from "../decorators";
-import { AbstractClass } from "../utils/abstract-class.type";
+import { Injectable } from "../../decorators";
+import { AbstractClass } from "../../utils/abstract-class.type";
 import { IoCContainer } from "./ioc-container";
 
 @Injectable()
